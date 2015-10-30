@@ -76,35 +76,17 @@ app.get('/download/sample.xlsx',function(req, res){
 * Produce **multiple worksheet** for nested XML file.
 
 ```
-var test = {
-    parent1: {
-        child1: {
-            child11: {
-                child111: 10,
-                child112: 14,
-                child1111: {
-                    child1112: 15
-                }
-            },
-            child12: 11
-        },
-        child2: {
-            child21: 20,
-            child22: 21
-        }
-    },
-    parent2: {
-        child3: {
-            child11: 101,
-            child21: 102
-        }
-    }
-}
+var xmlData = '<?xml version="1.0" encoding="utf-8"?><root><parent1><child1><child11><child111>10</child111>' +
+    '<child112>14</child112><child1111><child1112>15</child1112></child1111>' +
+    '</child11><child12>12</child12></child1><child2><child21>20</child21>' +
+    '<child22>21</child22></child2></parent1>' +
+    '<parent2><child3><child11>101</child11><child21>102</child21></child3></parent2>' +
+    '</root>'
 ```
-**produce**
 
-![sample image]
-(file:///tmp/tmp0uf5d0.html/sample.png)
+The resulting excel will look like this
+
+![resulting excel](/kasongoyo/flatxml2excel/raw/master/sample.png)
 
 * **coerce:** Makes type coercion. i.e.: numbers and booleans present in attributes and element values are converted from string to its correspondent data types. Coerce can be optionally defined as an object with specific methods of coercion based on attribute name or tag name, with fallback to default coercion.
 * **sanitize:** Sanitizes the following characters present in element values:

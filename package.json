@@ -1,11 +1,12 @@
 {
     "name": "flatxml2excel",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Tool to convert xml to excel",
     "main": "xmlXlsTool.js",
     "directories": {
         "test": "test"
     },
+     "repository": "https://github.com/kasongoyo/flatxml2excel",
     "dependencies": {
         "msexcel-builder": "^0.0.2",
         "xml2json": "^0.9.0"
