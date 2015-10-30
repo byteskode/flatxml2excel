@@ -1,0 +1,4 @@
+**/*.xls
+**/*.xlsx
+**/*.xlsx*
+node_modules/**
