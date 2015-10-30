@@ -85,8 +85,7 @@ var xmlData = '<?xml version="1.0" encoding="utf-8"?><root><parent1><child1><chi
 ```
 
 The resulting excel will look like this
-
-![resulting excel](/kasongoyo/flatxml2excel/raw/master/sample.png)
+<img src="sample.png" />
 
 * **coerce:** Makes type coercion. i.e.: numbers and booleans present in attributes and element values are converted from string to its correspondent data types. Coerce can be optionally defined as an object with specific methods of coercion based on attribute name or tag name, with fallback to default coercion.
 * **sanitize:** Sanitizes the following characters present in element values:

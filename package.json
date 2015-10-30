@@ -1,6 +1,6 @@
 {
     "name": "flatxml2excel",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Tool to convert xml to excel",
     "main": "xmlXlsTool.js",
     "directories": {
