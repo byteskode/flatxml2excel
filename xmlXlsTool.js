@@ -1,6 +1,7 @@
 var excelbuilder = require('msexcel-builder');
 var parser = require('xml2json');
 var fs = require('fs');
+var path = require('path');
 
 
 var flattenJSON = function(json, filter) {
@@ -64,13 +65,12 @@ var buildXls = function(xml, options, callback) {
         options.buffer = false;
     };
 
-    var workbook;
-    if (options.hasOwnProperty('filepath') && options.hasOwnProperty('filename')) {
-        workbook = excelbuilder.createWorkbook(options.filepath, options.filename);
-    } else {
-        var workbook = excelbuilder.createWorkbook('./', 'sample.xlsx');
+    if (!options.hasOwnProperty('filepath') || !options.hasOwnProperty('filename')) {
+        options.filepath = './';
+        options.filename = 'sample.xlsx';
     }
-    
+    var workbook = excelbuilder.createWorkbook(options.filepath, options.filename);
+
     var result = parser.toJson(xml, {
         object: true,
         coerce: true,
@@ -99,13 +99,14 @@ var buildXls = function(xml, options, callback) {
                 //error so pass null
                 callback(null);
             };
-            fs.readFile('./sample.xlsx', function(err, data) {
+            var fileName = path.join(options.filepath, options.filename);
+            fs.readFile(fileName, function(err, data) {
                 if (err) {
                     throw err;
                 };
                 //pass buffer object
                 callback(data);
-                fs.unlinkSync('./sample.xlsx');
+                fs.unlinkSync(fileName);
             })
         }
     });
@@ -134,7 +135,7 @@ module.exports = {
 
     middleware: function(req, res, next) {
         res.xls = function(fn, xml) {
-            var xls = buildXls(xml, function(data) {
+            var xls = buildXls(xml, {buffer:true}, function(data) {
                 res.setHeader('Content-Type', 'application/vnd.openxmlformats');
                 res.setHeader("Content-Disposition", "attachment; filename=" + fn);
                 res.end(data, 'binary');

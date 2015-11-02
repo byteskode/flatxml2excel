@@ -113,7 +113,7 @@ describe("flatten json", function() {
 
 });
 
-describe('convert to excel', function() {
+describe.only('convert to excel', function() {
     it('should create workbook', function(done) {
         xmlXlsTool.buildXls(xmlData, function(xls) {
             expect(xls).to.be.null;
@@ -121,9 +121,19 @@ describe('convert to excel', function() {
         })
     });
 
-    it('should create excel file in filepath specified', function (done) {
-         xmlXlsTool.buildXls(xmlData,{filepath:'./', filename:'output.xlsx'}, function(xls) {
+    it('should create excel file in filepath specified', function(done) {
+        xmlXlsTool.buildXls(xmlData, {
+            filepath: './',
+            filename: 'output.xlsx'
+        }, function(xls) {
             expect(xls).to.be.null;
+            done()
+        })
+    });
+
+    it('should create excel and return its buffer equivalent', function(done) {
+        xmlXlsTool.buildXls(xmlData, {buffer:true}, function(xls) {
+            expect(xls).not.to.be.null;
             done()
         })
     });
